@@ -47,12 +47,13 @@ async def host_exists(session, zabbix_server, hostname, token):
         "jsonrpc": "2.0",
         "method": "host.get",
         "params": {
-            "filter": {
+            "search": {
                 "host": [hostname]
-            }
+            },
+            "searchByAny": True
         },
         "auth": token,
-        "id": 1
+        "id": 1,
     }
 
     async with session.post(url, headers=headers, json=data, ssl=False) as response:
